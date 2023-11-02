@@ -32,3 +32,6 @@ class Login:
     
     def display_invalid_credientials_data(self):
         return self.driver.find_element(By.CSS_SELECTOR,self.display_invalid_crediential_xpath).is_displayed()
+    
+    def click_on_edit_our_profile_information(self):
+        return self.driver.find_element(By.LINK_TEXT,self.display_link_text_xpath).click()

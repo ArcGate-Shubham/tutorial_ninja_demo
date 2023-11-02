@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Register:
@@ -16,6 +18,8 @@ class Register:
         self.click_submt_on_registeration_xpath = '//input[@value="Continue"]'
         self.successfully_content_show_xpath = 'content'
         self.click_on_no_checkbox_xpath = '//input[@value="1"][@name="newsletter"]'
+        self.invalid_message_xpath = 'div.text-danger'
+        self.display_invalid_message_xpath = '//*[@id="content"]/form/fieldset[2]/div[2]/div/div'
         
     def click_on_my_account_text(self):
         self.driver.find_element(By.XPATH,self.click_on_link_text_my_account_xpath).click()
@@ -52,3 +56,9 @@ class Register:
     
     def click_on_no_checkbox(self):
         self.driver.find_element(By.XPATH,self.click_on_no_checkbox_xpath).click()
+        
+    def display_validation_message(self):
+        return self.driver.find_element(By.CSS_SELECTOR,self.invalid_message_xpath).is_displayed()
+    
+    def display_invalid_message(self):
+        return self.driver.find_element(By.XPATH,self.display_invalid_message_xpath).text
