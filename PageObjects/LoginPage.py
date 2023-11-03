@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Login:
@@ -11,6 +13,7 @@ class Login:
         self.click_submit_button_xpath = 'input.btn-primary'
         self.display_link_text_xpath = 'Edit your account information'
         self.display_invalid_crediential_xpath = 'div.alert-dismissible'
+        self.click_display_link_text_xpath = 'Change your password'
         
     def click_on_my_account_link_text(self):
         self.driver.find_element(By.XPATH,self.click_my_account_link_text_xpath).click()
@@ -35,3 +38,8 @@ class Login:
     
     def click_on_edit_our_profile_information(self):
         return self.driver.find_element(By.LINK_TEXT,self.display_link_text_xpath).click()
+    
+    def click_on_Change_your_password(self):
+        wait = WebDriverWait(self.driver, 5)
+        click_change_password = wait.until(EC.element_to_be_clickable((By.LINK_TEXT,self.click_display_link_text_xpath)))
+        click_change_password.click()

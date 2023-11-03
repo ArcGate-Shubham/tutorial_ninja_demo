@@ -1,5 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class EditProfile:
@@ -11,6 +13,9 @@ class EditProfile:
         self.update_phone_xpath = 'input-telephone'
         self.click_on_submit_button_xpath = 'input.btn.btn-primary'
         self.display_successfully_updated_message_xpath = 'div.alert-success'
+        self.display_error_message_for_first_name_xpath = 'div.text-danger'
+        self.click_on_back_button_xpath = '.buttons div.pull-left'
+        self.display_account_word_text_xpath = '//*[@id="account-account"]/ul/li[2]/a'
         
     def update_input_firstname(self, firstname):
         update_firstname = self.driver.find_element(By.ID,self.update_input_firstname_xpath)
@@ -42,3 +47,16 @@ class EditProfile:
         
     def display_successfully_updated_message(self):
         return self.driver.find_element(By.CSS_SELECTOR,self.display_successfully_updated_message_xpath).is_displayed()
+    
+    def display_error_message(self):
+        return self.driver.find_element(By.CSS_SELECTOR,self.display_error_message_for_first_name_xpath).is_displayed()
+    
+    def click_on_back_button(self):
+        wait = WebDriverWait(self.driver, 5)
+        back_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.click_on_back_button_xpath)))
+        back_button.click()
+
+    def display_specific_word(self):
+        wait = WebDriverWait(self.driver, 5)
+        element = wait.until(EC.visibility_of_element_located((By.XPATH, self.display_account_word_text_xpath)))
+        return element.is_displayed()
