@@ -14,6 +14,7 @@ class Login:
         self.display_link_text_xpath = 'Edit your account information'
         self.display_invalid_crediential_xpath = 'div.alert-dismissible'
         self.click_display_link_text_xpath = 'Change your password'
+        self.click_modify_your_address_book_xptah = 'div#content ul li a'
         
     def click_on_my_account_link_text(self):
         self.driver.find_element(By.XPATH,self.click_my_account_link_text_xpath).click()
@@ -43,3 +44,7 @@ class Login:
         wait = WebDriverWait(self.driver, 5)
         click_change_password = wait.until(EC.element_to_be_clickable((By.LINK_TEXT,self.click_display_link_text_xpath)))
         click_change_password.click()
+        
+    def click_modify_address_word(self):
+        return self.driver.find_elements(By.CSS_SELECTOR, self.click_modify_your_address_book_xptah)
+

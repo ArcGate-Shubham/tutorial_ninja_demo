@@ -13,6 +13,8 @@ class ChangePassword:
         self.success_messege_display_xpath = 'div.alert-success'
         self.invalid_message_display_xpath = 'div.text-danger'
         self.invalid_message_for_confirm_password_input_xpath = '//*[@id="content"]/form/fieldset/div[2]/div/div'
+        self.click_on_back_button_xpath = 'div.buttons div.pull-left'
+        self.display_Account_related_text_xpath = '//a[text()="Account"]'
     
     def update_input_password(self, password):
         wait = WebDriverWait(self.driver, 5)
@@ -44,3 +46,12 @@ class ChangePassword:
         display_error_message_data = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, self.invalid_message_display_xpath)))
         display_error_message_data_value = wait.until(EC.presence_of_element_located((By.XPATH, self.invalid_message_for_confirm_password_input_xpath)))
         return display_error_message_data.is_displayed() and display_error_message_data_value.is_displayed()
+    
+    def click_back_button(self):
+        self.driver.find_element(By.CSS_SELECTOR,self.click_on_back_button_xpath).click()
+        
+    def display_account_word(self):
+        wait = WebDriverWait(self.driver, 5)
+        display_word = wait.until(EC.presence_of_element_located((By.XPATH, self.display_Account_related_text_xpath)))
+        return display_word
+
